@@ -1,44 +1,50 @@
-extends Node3D
+extends CharacterBody3D
 
 const TILE_SIZE = 2.0
-const MOVE_TIME = 0.2
-const TURN_TIME = 0.15
+const MOVE_TIME = 0.40
+const TURN_TIME = 0.2
 
 # 0: Norte (-Z), 1: Oeste (-X), 2: Sul (+Z), 3: Leste (+X)
 var facing = 0
-var is_moving = false
 
-func _process(_delta):
+var is_moving: bool = false
+
+func _physics_process(delta: float) -> void:
 	if is_moving:
 		return
+	if not is_on_floor():
+		is_moving = true
+		velocity += get_gravity()*delta
+		move_and_slide()
+		is_moving = false
+		return
 
-	if Input.is_action_just_pressed("ui_up"):
-		# FORÇA O RAIO A SE REPOSICIONAR NO FRAME ATUAL
+	if Input.is_action_just_pressed("move_up"):
 		$RayCast3D.force_raycast_update() 
-		
 		if $RayCast3D.is_colliding():
-			print("Bloqueado por parede!") # Veja se isso aparece no Output
 			return
 		move_forward()
 		
-	elif Input.is_action_just_pressed("ui_left"):
-		rotate_camera(1, 90)  # Gira +90º (Esquerda)
+	elif Input.is_action_just_pressed("move_left"):
+		rotate_camera(1, 90)
 		
-	elif Input.is_action_just_pressed("ui_right"):
-		rotate_camera(-1, -90) # Gira -90º (Direita)
+	elif Input.is_action_just_pressed("move_right"):
+		rotate_camera(-1, -90)
 		
-	elif Input.is_action_just_pressed("ui_down"):
-		rotate_camera(2, 180) # Gira 180º (Costas)
+	elif Input.is_action_just_pressed("move_down"):
+		rotate_camera(2, 180)
+	
+	move_and_slide()
 
 func move_forward():
-	is_moving = true
-	var direction = get_forward()
-	var target_position = position + direction * TILE_SIZE
 	
-	var tween = create_tween()
-	tween.tween_property(self, "position", target_position, MOVE_TIME)
-	await tween.finished
-	is_moving = false
+	if is_on_floor():
+		is_moving = true
+		var tween = create_tween()
+		tween.tween_property(self, "position", position + transform.basis * Vector3(0, 0, -2), 0.2)
+		await tween.finished
+		is_moving = false
+
 
 func rotate_camera(direction_offset, degrees):
 	is_moving = true
@@ -46,7 +52,6 @@ func rotate_camera(direction_offset, degrees):
 	# Calcula o próximo facing usando posmod para evitar números negativos
 	facing = posmod(facing + direction_offset, 4)
 	
-	# Removemos o fmod/posmod do callback. Deixamos o ângulo acumular na propriedade
 	# rotation.y + X. Isso impede que o ângulo dê "saltos" fantasmas.
 	var target_rotation = rotation.y + deg_to_rad(degrees)
 	
@@ -62,7 +67,6 @@ func rotate_camera(direction_offset, degrees):
 	is_moving = false
 
 func get_forward() -> Vector3:
-	# Esta tabela DEVE bater exatamente com a rotação visual do seu cenário
 	match facing:
 		0: return Vector3(0, 0, -1) # Norte
 		1: return Vector3(-1, 0, 0) # Oeste
