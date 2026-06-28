@@ -1,27 +1,82 @@
 [gd_scene format=3 uid="uid://840011urm2fa"]
 
-[ext_resource type="Texture2D" uid="uid://ld6e8hkm5lel" path="res://Graphics/Textures/Urban/PAVEMENT.png" id="1_7h0kd"]
+[ext_resource type="Texture2D" uid="uid://b20a17v8bb8c6" path="res://Graphics/Textures/Elements/TALLGRASS.png" id="1_7h0kd"]
+[ext_resource type="Texture2D" uid="uid://c8vuu0ntf6eh1" path="res://Graphics/Textures/Bricks/CLAYBRICKS.png" id="2_k6t24"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ov4ip"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_su7b5"]
 albedo_texture = ExtResource("1_7h0kd")
-uv1_triplanar = true
-uv1_triplanar_sharpness = 0.108818635
+uv1_scale = Vector3(3, 3, 3)
 texture_filter = 4
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qra7f"]
+rough = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_44ysg"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sa2ql"]
+lightmap_size_hint = Vector2i(14, 21)
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b67lx"]
+albedo_texture = ExtResource("1_7h0kd")
+uv1_scale = Vector3(3, 3, 3)
+texture_filter = 4
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1bvp3"]
+rough = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d6bvg"]
+size = Vector3(1, 1, 1.0043945)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa2ql"]
+albedo_texture = ExtResource("2_k6t24")
+uv1_scale = Vector3(3, 3, 3)
+texture_filter = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mpdlp"]
 
 [node name="Tiles" type="Node3D" unique_id=53716567]
 
-[node name="Cube" type="MeshInstance3D" parent="." unique_id=504022587]
-mesh = SubResource("BoxMesh_ov4ip")
-surface_material_override/0 = SubResource("StandardMaterial3D_h2yge")
+[node name="Grass" type="Node3D" parent="." unique_id=179203621]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Cube" unique_id=1523038485]
+[node name="Grass_Full" type="MeshInstance3D" parent="Grass" unique_id=1642638145]
+visible = false
+gi_mode = 2
+mesh = SubResource("BoxMesh_ov4ip")
+surface_material_override/0 = SubResource("StandardMaterial3D_su7b5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass/Grass_Full" unique_id=1381409845]
 physics_material_override = SubResource("PhysicsMaterial_qra7f")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/StaticBody3D" unique_id=1198312560]
-shape = SubResource("BoxShape3D_44ysg")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/Grass_Full/StaticBody3D" unique_id=919617517]
+shape = SubResource("BoxShape3D_h2yge")
+
+[node name="Grass_Half" type="MeshInstance3D" parent="Grass" unique_id=2044582445]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
+top_level = true
+gi_mode = 2
+mesh = SubResource("BoxMesh_sa2ql")
+surface_material_override/0 = SubResource("StandardMaterial3D_b67lx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass/Grass_Half" unique_id=1368566477]
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/Grass_Half/StaticBody3D" unique_id=401917360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0021972656)
+shape = SubResource("BoxShape3D_d6bvg")
+
+[node name="Bricks" type="Node3D" parent="." unique_id=244034181]
+visible = false
+
+[node name="ClayBricks" type="MeshInstance3D" parent="Bricks" unique_id=12337022]
+gi_mode = 2
+mesh = SubResource("BoxMesh_ov4ip")
+surface_material_override/0 = SubResource("StandardMaterial3D_sa2ql")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Bricks/ClayBricks" unique_id=818867417]
+physics_material_override = SubResource("PhysicsMaterial_qra7f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bricks/ClayBricks/StaticBody3D" unique_id=1026522452]
+shape = SubResource("BoxShape3D_mpdlp")
