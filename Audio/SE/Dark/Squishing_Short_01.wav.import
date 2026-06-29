@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cro1m3te2jvra"
+path="res://.godot/imported/Squishing_Short_01.wav-d5f4926c16f7e6c75029da0419788a90.sample"
+
+[deps]
+
+source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Dark/Squishing_Short_01.wav"
+dest_files=["res://.godot/imported/Squishing_Short_01.wav-d5f4926c16f7e6c75029da0419788a90.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

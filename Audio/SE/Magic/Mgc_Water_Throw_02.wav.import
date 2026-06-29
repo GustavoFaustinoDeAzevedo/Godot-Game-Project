@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bj5gmkq2yuq8r"
+path="res://.godot/imported/Mgc_Water_Throw_02.wav-f2ad60eb9061f349d1576e7af19da1bf.sample"
+
+[deps]
+
+source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Magic/Mgc_Water_Throw_02.wav"
+dest_files=["res://.godot/imported/Mgc_Water_Throw_02.wav-f2ad60eb9061f349d1576e7af19da1bf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

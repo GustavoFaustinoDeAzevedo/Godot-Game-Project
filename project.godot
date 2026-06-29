@@ -20,6 +20,12 @@ config/icon="res://icon.svg"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+Grass="Bloco de grama"
+Wood="Bloco de Madeira"
+Concrete="Bloco Genérico"
+
 [input]
 
 move_up={

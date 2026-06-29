@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://beniop15kxkh3"
+path="res://.godot/imported/Blood_01.wav-3c33bd9121da03af9114ddbef1a774c8.sample"
+
+[deps]
+
+source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Dark/Blood_01.wav"
+dest_files=["res://.godot/imported/Blood_01.wav-3c33bd9121da03af9114ddbef1a774c8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

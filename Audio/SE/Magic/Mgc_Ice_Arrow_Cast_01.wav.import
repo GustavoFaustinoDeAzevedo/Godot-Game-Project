@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bkoaxx6ts5faa"
+path="res://.godot/imported/Mgc_Ice_Arrow_Cast_01.wav-e247f31c0ce2dadae9ef9550bb4dd9ef.sample"
+
+[deps]
+
+source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Magic/Mgc_Ice_Arrow_Cast_01.wav"
+dest_files=["res://.godot/imported/Mgc_Ice_Arrow_Cast_01.wav-e247f31c0ce2dadae9ef9550bb4dd9ef.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

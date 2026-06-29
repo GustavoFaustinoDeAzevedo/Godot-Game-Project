@@ -41,19 +41,19 @@ texture_filter = 4
 
 [node name="Grass" type="Node3D" parent="." unique_id=179203621]
 
-[node name="Grass_Full" type="MeshInstance3D" parent="Grass" unique_id=1642638145]
+[node name="Grass" type="MeshInstance3D" parent="Grass" unique_id=1642638145 groups=["Grass"]]
 visible = false
 gi_mode = 2
 mesh = SubResource("BoxMesh_ov4ip")
 surface_material_override/0 = SubResource("StandardMaterial3D_su7b5")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Grass/Grass_Full" unique_id=1381409845]
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass/Grass" unique_id=1381409845]
 physics_material_override = SubResource("PhysicsMaterial_qra7f")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/Grass_Full/StaticBody3D" unique_id=919617517]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/Grass/StaticBody3D" unique_id=919617517]
 shape = SubResource("BoxShape3D_h2yge")
 
-[node name="Grass_Half" type="MeshInstance3D" parent="Grass" unique_id=2044582445]
+[node name="Grass_Half" type="MeshInstance3D" parent="Grass" unique_id=2044582445 groups=["Grass"]]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
 top_level = true
 gi_mode = 2
@@ -67,7 +67,7 @@ physics_material_override = SubResource("PhysicsMaterial_1bvp3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0021972656)
 shape = SubResource("BoxShape3D_d6bvg")
 
-[node name="Bricks" type="Node3D" parent="." unique_id=244034181]
+[node name="Bricks" type="Node3D" parent="." unique_id=244034181 groups=["Concrete"]]
 visible = false
 
 [node name="ClayBricks" type="MeshInstance3D" parent="Bricks" unique_id=12337022]

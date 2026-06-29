@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bts5q2t1plng2"
+path="res://.godot/imported/Mgc_Electric_Throw_01.wav-8d319ff1f9e568a1916a9407e05774e2.sample"
+
+[deps]
+
+source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Magic/Mgc_Electric_Throw_01.wav"
+dest_files=["res://.godot/imported/Mgc_Electric_Throw_01.wav-8d319ff1f9e568a1916a9407e05774e2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
