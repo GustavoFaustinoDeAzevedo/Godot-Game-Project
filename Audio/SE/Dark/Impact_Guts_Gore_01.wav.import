@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://21da7o8xcbtg"
-path="res://.godot/imported/Impact_Guts_Gore_01.wav-bc428656a2dd0240f731dde8cafb482e.sample"
+path="res://.godot/imported/Impact_Guts_Gore_01.wav-5eb71e3c82a1e7b2dc9e684e92633feb.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Dark/Impact_Guts_Gore_01.wav"
-dest_files=["res://.godot/imported/Impact_Guts_Gore_01.wav-bc428656a2dd0240f731dde8cafb482e.sample"]
+source_file="res://Audio/SE/Dark/Impact_Guts_Gore_01.wav"
+dest_files=["res://.godot/imported/Impact_Guts_Gore_01.wav-5eb71e3c82a1e7b2dc9e684e92633feb.sample"]
 
 [params]
 

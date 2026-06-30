@@ -6,7 +6,7 @@ extends CharacterBody3D
 ##Define o tamanho de cada tile
 @export var TILE_SIZE = 1.0
 ##Velocidade de movimento do personagem
-@export var MOVE_TIME = 0.40
+@export var MOVE_TIME = 0.4
 ##Velocidade da "virada"
 @export var TURN_TIME = 0.2
 ##Minima altura em que o personagem pode ficar
@@ -37,13 +37,15 @@ extends CharacterBody3D
 
 
 # 0: Norte (-Z), 1: Oeste (-X), 2: Sul (+Z), 3: Leste (+X)
-var facing = 0
+var facing: int = 0
 var history: Array[Vector3] = []
 
 var is_walking: bool = false
 var is_falling: bool = false
-var is_facing_wall = false
-var is_facing_stairs = false
+var is_facing_wall: bool = false
+var is_facing_stairs: bool = false
+
+var can_move: bool = true
 
 var footstep_sounds = {}
 
@@ -115,16 +117,67 @@ func _input(event):
 
 func _physics_process(delta: float) -> void:
 	if is_walking:
-		
 		return
 		
 	if is_falling:
+		can_move = false
 		velocity += get_gravity()*delta
 		if global_position.y <= MIN_HEIGHT:
 			redo_movement()
+		can_move = true
 		
-	elif not is_falling and is_on_floor():
-		if Input.is_action_just_pressed("move_up"):
+	#elif not is_falling and is_on_floor():
+		#if Input.is_action_pressed("move_up"):
+		#	head_ray.force_raycast_update() 
+		#	belly_ray.force_raycast_update() 
+		#	foot_ray.force_raycast_update()
+		#	
+		#	is_facing_wall = head_ray.is_colliding() or belly_ray.is_colliding()
+		#	is_facing_stairs = foot_ray.is_colliding() and not is_facing_wall
+			
+		#	if is_facing_wall:
+		#		return
+			#elif is_facing_stairs:
+			#	move_forward(0.45)
+			#else:
+				
+			
+			
+		#elif Input.is_action_just_pressed("move_left"):
+		#	rotate_camera(1, 90)
+			
+		#elif Input.is_action_just_pressed("move_right"):
+		#	rotate_camera(-1, -90)
+			
+		#elif Input.is_action_just_pressed("move_down"):
+		#	rotate_camera(2, 180)
+	@warning_ignore("narrowing_conversion")
+	var grid_pos = Vector3(global_position.x, global_position.y, global_position.z)
+	var coords_changed = history.is_empty() or grid_pos != history[-1]
+	
+	if coords_changed and not is_falling and can_move:
+		history.append(grid_pos)
+		play_footstep()
+		if history.size() > MAX_HISTORY:
+			history.remove_at(0)
+	move_and_slide()
+
+
+
+func _process(_delta: float) -> void:
+	
+	is_falling = not is_on_floor()
+	
+	if can_move and not is_falling:
+		var direction = Input.get_vector("move_left","move_right","move_up","move_down")
+		
+		if Input.is_action_just_pressed("turn_left"):
+			rotate_camera(1, 90)
+		elif Input.is_action_just_pressed("turn_right"):
+			rotate_camera(-1, -90)
+		elif Input.is_action_just_pressed("move_down"):
+			rotate_camera(2, 180)
+		elif direction != Vector2.ZERO:
 			head_ray.force_raycast_update() 
 			belly_ray.force_raycast_update() 
 			foot_ray.force_raycast_update()
@@ -135,51 +188,36 @@ func _physics_process(delta: float) -> void:
 			if is_facing_wall:
 				return
 			elif is_facing_stairs:
-				move_forward(0.45)
+				move_forward(direction,global_position.y + 0.45)
 			else:
-				move_forward()
-			
-			
-		elif Input.is_action_just_pressed("move_left"):
-			rotate_camera(1, 90)
-			
-		elif Input.is_action_just_pressed("move_right"):
-			rotate_camera(-1, -90)
-			
-		elif Input.is_action_just_pressed("move_down"):
-			rotate_camera(2, 180)
-	move_and_slide()
+				move_forward(direction)
+			can_move = false
+			await get_tree().create_timer(MOVE_TIME).timeout
+			can_move = true
 
 
 
-func _process(_delta: float) -> void:
-	
-	is_falling = not is_on_floor()
-	
-	@warning_ignore("narrowing_conversion")
-	var grid_pos = Vector3(global_position.x, global_position.y, global_position.z)
-	var coords_changed = history.is_empty() or grid_pos != history[-1]
-	
-	if coords_changed and not is_falling and not is_walking:
-		history.append(grid_pos)
-		play_footstep()
-		if history.size() > MAX_HISTORY:
-			history.remove_at(0)
-
-
-
-func move_forward(_height = 0.0):
-	if is_on_floor():			
+func move_forward(direction, _height = global_position.y):
+	var local_direction = Vector3(direction.x, 0, direction.y)
+	if is_on_floor():
 		is_walking = true
+		var camera_transform = self.global_transform.basis
+		local_direction = (camera_transform * local_direction).normalized()
+		local_direction.y = 0
+		
+		var target_position = global_position + local_direction
+		target_position.y = _height
+		
 		var tween = create_tween()
-		tween.tween_property(self, "position", position + transform.basis * Vector3(0, _height, -TILE_SIZE), 0.2)
+		tween.tween_property(self, "global_position", target_position, MOVE_TIME) 
+		
 		await tween.finished
 		is_walking = false
 
 
 
 func rotate_camera(direction_offset, degrees):
-	is_walking = true
+	can_move = false
 	
 	# Calcula o próximo facing usando posmod para evitar números negativos
 	facing = posmod(facing + direction_offset, 4)
@@ -190,13 +228,13 @@ func rotate_camera(direction_offset, degrees):
 	var tween = create_tween()
 	tween.tween_property(
 		self, 
-		"rotation:y", 
+		"global_rotation:y", 
 		target_rotation, 
 		TURN_TIME * (2 if abs(degrees) == 180 else 1)
 	)
 	
 	await tween.finished
-	is_walking = false
+	can_move = true
 
 
 
@@ -214,3 +252,4 @@ func redo_movement():
 	if not history.is_empty():
 		var last_position = history.pop_back()
 		global_position = last_position
+		

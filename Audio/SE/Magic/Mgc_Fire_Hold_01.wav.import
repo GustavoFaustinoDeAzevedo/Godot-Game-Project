@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c5o63jlsmtxnh"
-path="res://.godot/imported/Mgc_Fire_Hold_01.wav-471dbad409d5e5a01b33f1dbb213e2e5.sample"
+path="res://.godot/imported/Mgc_Fire_Hold_01.wav-15af9bee6c3822983283815a9139bfae.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Magic/Mgc_Fire_Hold_01.wav"
-dest_files=["res://.godot/imported/Mgc_Fire_Hold_01.wav-471dbad409d5e5a01b33f1dbb213e2e5.sample"]
+source_file="res://Audio/SE/Magic/Mgc_Fire_Hold_01.wav"
+dest_files=["res://.godot/imported/Mgc_Fire_Hold_01.wav-15af9bee6c3822983283815a9139bfae.sample"]
 
 [params]
 

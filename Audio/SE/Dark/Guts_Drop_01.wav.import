@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dhy1kt4gq2y8i"
-path="res://.godot/imported/Guts_Drop_01.wav-87bc12a433c94734f148371793a59bc4.sample"
+path="res://.godot/imported/Guts_Drop_01.wav-7cabcd362c6762a93bd86df95d96c2a4.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Dark/Guts_Drop_01.wav"
-dest_files=["res://.godot/imported/Guts_Drop_01.wav-87bc12a433c94734f148371793a59bc4.sample"]
+source_file="res://Audio/SE/Dark/Guts_Drop_01.wav"
+dest_files=["res://.godot/imported/Guts_Drop_01.wav-7cabcd362c6762a93bd86df95d96c2a4.sample"]
 
 [params]
 

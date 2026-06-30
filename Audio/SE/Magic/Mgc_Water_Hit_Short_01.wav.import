@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dtenbeblqrbee"
-path="res://.godot/imported/Mgc_Water_Hit_Short_01.wav-1008e900b6e7a1b552264cac251b96fc.sample"
+path="res://.godot/imported/Mgc_Water_Hit_Short_01.wav-8abe20332dd930749764bf2494eab407.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Magic/Mgc_Water_Hit_Short_01.wav"
-dest_files=["res://.godot/imported/Mgc_Water_Hit_Short_01.wav-1008e900b6e7a1b552264cac251b96fc.sample"]
+source_file="res://Audio/SE/Magic/Mgc_Water_Hit_Short_01.wav"
+dest_files=["res://.godot/imported/Mgc_Water_Hit_Short_01.wav-8abe20332dd930749764bf2494eab407.sample"]
 
 [params]
 

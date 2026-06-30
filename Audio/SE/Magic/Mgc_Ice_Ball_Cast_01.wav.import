@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bekqhrruo01xi"
-path="res://.godot/imported/Mgc_Ice_Ball_Cast_01.wav-d0236f91c16b53207613bba906cafc6a.sample"
+path="res://.godot/imported/Mgc_Ice_Ball_Cast_01.wav-bffd60eb1acd2ff97e10d5e028a4f928.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Magic/Mgc_Ice_Ball_Cast_01.wav"
-dest_files=["res://.godot/imported/Mgc_Ice_Ball_Cast_01.wav-d0236f91c16b53207613bba906cafc6a.sample"]
+source_file="res://Audio/SE/Magic/Mgc_Ice_Ball_Cast_01.wav"
+dest_files=["res://.godot/imported/Mgc_Ice_Ball_Cast_01.wav-bffd60eb1acd2ff97e10d5e028a4f928.sample"]
 
 [params]
 

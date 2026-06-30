@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ckskt83m6imis"
-path="res://.godot/imported/Mgc_Glacier_Cast_01.wav-235bad5c5e5a911b49cc5f848d8e1ec3.sample"
+path="res://.godot/imported/Mgc_Glacier_Cast_01.wav-0bd9d7bf164080e70f7fe3afa01b4578.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Magic/Mgc_Glacier_Cast_01.wav"
-dest_files=["res://.godot/imported/Mgc_Glacier_Cast_01.wav-235bad5c5e5a911b49cc5f848d8e1ec3.sample"]
+source_file="res://Audio/SE/Magic/Mgc_Glacier_Cast_01.wav"
+dest_files=["res://.godot/imported/Mgc_Glacier_Cast_01.wav-0bd9d7bf164080e70f7fe3afa01b4578.sample"]
 
 [params]
 

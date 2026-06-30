@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://beniop15kxkh3"
-path="res://.godot/imported/Blood_01.wav-3c33bd9121da03af9114ddbef1a774c8.sample"
+path="res://.godot/imported/Blood_01.wav-5ecf842c57c7b557b9b2aef5482cbd76.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Dark/Blood_01.wav"
-dest_files=["res://.godot/imported/Blood_01.wav-3c33bd9121da03af9114ddbef1a774c8.sample"]
+source_file="res://Audio/SE/Dark/Blood_01.wav"
+dest_files=["res://.godot/imported/Blood_01.wav-5ecf842c57c7b557b9b2aef5482cbd76.sample"]
 
 [params]
 

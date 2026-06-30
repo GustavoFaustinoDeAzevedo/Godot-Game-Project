@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bkoaxx6ts5faa"
-path="res://.godot/imported/Mgc_Ice_Arrow_Cast_01.wav-e247f31c0ce2dadae9ef9550bb4dd9ef.sample"
+path="res://.godot/imported/Mgc_Ice_Arrow_Cast_01.wav-52efa1bd8bfa8845e811ba645d38bdc7.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Magic/Mgc_Ice_Arrow_Cast_01.wav"
-dest_files=["res://.godot/imported/Mgc_Ice_Arrow_Cast_01.wav-e247f31c0ce2dadae9ef9550bb4dd9ef.sample"]
+source_file="res://Audio/SE/Magic/Mgc_Ice_Arrow_Cast_01.wav"
+dest_files=["res://.godot/imported/Mgc_Ice_Arrow_Cast_01.wav-52efa1bd8bfa8845e811ba645d38bdc7.sample"]
 
 [params]
 

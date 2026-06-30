@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bex7tbegg7syw"
-path="res://.godot/imported/Mgc_Fire_Cast_01.wav-21cfee8c306336491dadf1bbacc4d6d0.sample"
+path="res://.godot/imported/Mgc_Fire_Cast_01.wav-e196175b9dd177e86613e8bf57078f3d.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Magic/Mgc_Fire_Cast_01.wav"
-dest_files=["res://.godot/imported/Mgc_Fire_Cast_01.wav-21cfee8c306336491dadf1bbacc4d6d0.sample"]
+source_file="res://Audio/SE/Magic/Mgc_Fire_Cast_01.wav"
+dest_files=["res://.godot/imported/Mgc_Fire_Cast_01.wav-e196175b9dd177e86613e8bf57078f3d.sample"]
 
 [params]
 

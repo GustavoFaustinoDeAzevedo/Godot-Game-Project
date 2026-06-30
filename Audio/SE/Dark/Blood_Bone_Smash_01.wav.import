@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c2sisgij6hdgi"
-path="res://.godot/imported/Blood_Bone_Smash_01.wav-5e934766deb7896c9553104d800c22b3.sample"
+path="res://.godot/imported/Blood_Bone_Smash_01.wav-ff05f1ed43a89f2f57341cab0d325c4a.sample"
 
 [deps]
 
-source_file="res://Audio/SE/Small Sound Kit/Small Sound Kit/Dark/Blood_Bone_Smash_01.wav"
-dest_files=["res://.godot/imported/Blood_Bone_Smash_01.wav-5e934766deb7896c9553104d800c22b3.sample"]
+source_file="res://Audio/SE/Dark/Blood_Bone_Smash_01.wav"
+dest_files=["res://.godot/imported/Blood_Bone_Smash_01.wav-ff05f1ed43a89f2f57341cab0d325c4a.sample"]
 
 [params]
 
