@@ -74,24 +74,21 @@ func load_sounds_from_folder(folder_directory: String) -> Array:
 
 func play_footstep():
 	var detected_terrain = "concrete"
-	
-	if ground_ray.is_colliding():
-		var collision_point = ground_ray.get_collision_point()
-		var point_deviation_fix = collision_point - Vector3(0, 0.1, 0)
-		var grid_coord = grid_map.local_to_map(grid_map.to_local(point_deviation_fix))
-		var item_id = grid_map.get_cell_item(grid_coord)
+	var collision_point = global_position - Vector3(0, 1.1, 0)
+	var grid_coord = grid_map.local_to_map(grid_map.to_local(collision_point))
+	var item_id = grid_map.get_cell_item(grid_coord)
 		
-		print("Coord: ", grid_coord, " | ID Bruto: ", item_id)
+	print("Coord: ", collision_point, " | ID Bruto: ", item_id)
 		
-		match item_id:
-			0,1:
-				detected_terrain = "grass"
-			2:
-				detected_terrain = "wood"
-			3:
-				detected_terrain = "concrete"
-			_:
-				detected_terrain = "wood"
+	match item_id:
+		0,1:
+			detected_terrain = "grass"
+		2:
+			detected_terrain = "wood"
+		3:
+			detected_terrain = "concrete"
+		_:
+			detected_terrain = "wood"
 			
 	var sounds_list = footstep_sounds[detected_terrain]
 	if sounds_list.size() > 0:
@@ -126,31 +123,6 @@ func _physics_process(delta: float) -> void:
 			redo_movement()
 		can_move = true
 		
-	#elif not is_falling and is_on_floor():
-		#if Input.is_action_pressed("move_up"):
-		#	head_ray.force_raycast_update() 
-		#	belly_ray.force_raycast_update() 
-		#	foot_ray.force_raycast_update()
-		#	
-		#	is_facing_wall = head_ray.is_colliding() or belly_ray.is_colliding()
-		#	is_facing_stairs = foot_ray.is_colliding() and not is_facing_wall
-			
-		#	if is_facing_wall:
-		#		return
-			#elif is_facing_stairs:
-			#	move_forward(0.45)
-			#else:
-				
-			
-			
-		#elif Input.is_action_just_pressed("move_left"):
-		#	rotate_camera(1, 90)
-			
-		#elif Input.is_action_just_pressed("move_right"):
-		#	rotate_camera(-1, -90)
-			
-		#elif Input.is_action_just_pressed("move_down"):
-		#	rotate_camera(2, 180)
 	@warning_ignore("narrowing_conversion")
 	var grid_pos = Vector3(global_position.x, global_position.y, global_position.z)
 	var coords_changed = history.is_empty() or grid_pos != history[-1]
@@ -175,8 +147,8 @@ func _process(_delta: float) -> void:
 			rotate_camera(1, 90)
 		elif Input.is_action_just_pressed("turn_right"):
 			rotate_camera(-1, -90)
-		elif Input.is_action_just_pressed("move_down"):
-			rotate_camera(2, 180)
+		#elif Input.is_action_just_pressed("move_down"):
+		#	rotate_camera(2, 180)
 		elif direction != Vector2.ZERO:
 			head_ray.force_raycast_update() 
 			belly_ray.force_raycast_update() 
@@ -184,7 +156,8 @@ func _process(_delta: float) -> void:
 			
 			is_facing_wall = head_ray.is_colliding() or belly_ray.is_colliding()
 			is_facing_stairs = foot_ray.is_colliding() and not is_facing_wall
-			
+			var local_direction = Vector3(direction.y, 0, direction.x)
+			check_area_around(local_direction)
 			if is_facing_wall:
 				return
 			elif is_facing_stairs:
@@ -253,3 +226,16 @@ func redo_movement():
 		var last_position = history.pop_back()
 		global_position = last_position
 		
+
+
+func check_area_around(direction):
+	var space_state = get_world_3d().direct_space_state
+	var params = PhysicsRayQueryParameters3D.new()
+	
+	params.from = global_position
+	params.to = global_position + Vector3(0.25,0.25,0.25)*direction
+	print(params.to)
+	var result = space_state.intersect_ray(params)
+	
+	if result:
+		print("Tem uma parede na frente!")
