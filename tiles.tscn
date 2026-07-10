@@ -4,42 +4,71 @@
 [ext_resource type="Texture2D" uid="uid://c8vuu0ntf6eh1" path="res://Graphics/Textures/Bricks/CLAYBRICKS.png" id="2_k6t24"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ov4ip"]
+size = Vector3(6, 6, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_su7b5"]
 albedo_texture = ExtResource("1_7h0kd")
-uv1_scale = Vector3(3, 3, 3)
+uv1_scale = Vector3(10, 10, 10)
 texture_filter = 4
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qra7f"]
 rough = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
+size = Vector3(6, 6, 6)
 
 [sub_resource type="BoxMesh" id="BoxMesh_sa2ql"]
-lightmap_size_hint = Vector2i(14, 21)
+lightmap_size_hint = Vector2i(64, 66)
 add_uv2 = true
+size = Vector3(6, 3, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b67lx"]
 albedo_texture = ExtResource("1_7h0kd")
-uv1_scale = Vector3(3, 3, 3)
+uv1_scale = Vector3(6, 6, 6)
 texture_filter = 4
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1bvp3"]
 rough = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6bvg"]
-size = Vector3(1, 1, 1.0043945)
+size = Vector3(6, 3, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k6t24"]
+size = Vector3(6, 6, 6)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7h0kd"]
+load_path = "res://.godot/imported/CLAYBRICKS.png-397335746b600a2fa1e7e6c824f2a48e.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa2ql"]
-albedo_texture = ExtResource("2_k6t24")
-uv1_scale = Vector3(3, 3, 3)
+albedo_texture = SubResource("CompressedTexture2D_7h0kd")
+uv1_scale = Vector3(0.165, 0.25, -0.15)
+uv1_offset = Vector3(0.235, 1.51, 1.5)
+uv1_triplanar = true
 texture_filter = 4
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ivye"]
+size = Vector3(6, 6, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wlybw"]
+albedo_texture = ExtResource("2_k6t24")
+uv1_scale = Vector3(0.165, 0.25, -0.15)
+uv1_offset = Vector3(0.235, 1.405, 1.5)
+uv1_triplanar = true
+texture_filter = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_vra4g"]
+lightmap_size_hint = Vector2i(64, 66)
+material = SubResource("StandardMaterial3D_wlybw")
+add_uv2 = true
+size = Vector3(6, 3, 6)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_mpdlp"]
+size = Vector3(6, 3, 6)
 
 [node name="Tiles" type="Node3D" unique_id=53716567]
 
 [node name="Grass" type="Node3D" parent="." unique_id=179203621]
+visible = false
 
 [node name="Grass" type="MeshInstance3D" parent="Grass" unique_id=1642638145 groups=["Grass"]]
 visible = false
@@ -54,7 +83,6 @@ physics_material_override = SubResource("PhysicsMaterial_qra7f")
 shape = SubResource("BoxShape3D_h2yge")
 
 [node name="Grass_Half" type="MeshInstance3D" parent="Grass" unique_id=2044582445 groups=["Grass"]]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
 top_level = true
 gi_mode = 2
 mesh = SubResource("BoxMesh_sa2ql")
@@ -67,16 +95,26 @@ physics_material_override = SubResource("PhysicsMaterial_1bvp3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0021972656)
 shape = SubResource("BoxShape3D_d6bvg")
 
-[node name="Bricks" type="Node3D" parent="." unique_id=244034181 groups=["Concrete"]]
-visible = false
+[node name="ClayBricks" type="Node3D" parent="." unique_id=244034181 groups=["Concrete"]]
 
-[node name="ClayBricks" type="MeshInstance3D" parent="Bricks" unique_id=12337022]
+[node name="ClayBricks" type="MeshInstance3D" parent="ClayBricks" unique_id=12337022]
 gi_mode = 2
-mesh = SubResource("BoxMesh_ov4ip")
+mesh = SubResource("BoxMesh_k6t24")
 surface_material_override/0 = SubResource("StandardMaterial3D_sa2ql")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Bricks/ClayBricks" unique_id=818867417]
+[node name="StaticBody3D" type="StaticBody3D" parent="ClayBricks/ClayBricks" unique_id=818867417]
 physics_material_override = SubResource("PhysicsMaterial_qra7f")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bricks/ClayBricks/StaticBody3D" unique_id=1026522452]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClayBricks/ClayBricks/StaticBody3D" unique_id=1026522452]
+shape = SubResource("BoxShape3D_7ivye")
+
+[node name="ClayBricks_Half" type="MeshInstance3D" parent="ClayBricks" unique_id=562152435]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
+gi_mode = 2
+mesh = SubResource("BoxMesh_vra4g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ClayBricks/ClayBricks_Half" unique_id=941885671]
+physics_material_override = SubResource("PhysicsMaterial_qra7f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClayBricks/ClayBricks_Half/StaticBody3D" unique_id=1266213481]
 shape = SubResource("BoxShape3D_mpdlp")

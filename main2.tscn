@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://dkgpae5x0o85m"]
+
+[ext_resource type="MeshLibrary" uid="uid://c6a4wdywqg8mv" path="res://tiles.tres" id="1_oex3p"]
+[ext_resource type="Texture2D" uid="uid://ds3rhy2845fsw" path="res://Graphics/Parallaxes/Cosmos1.png" id="2_dmrlw"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8ce7h"]
+panorama = ExtResource("2_dmrlw")
+
+[sub_resource type="Sky" id="Sky_ov4ip"]
+sky_material = SubResource("PanoramaSkyMaterial_8ce7h")
+
+[sub_resource type="Environment" id="Environment_3yxjw"]
+background_mode = 2
+sky = SubResource("Sky_ov4ip")
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 3
+fog_enabled = true
+fog_light_energy = 0.0
+fog_sky_affect = 0.5
+
+[sub_resource type="GDScript" id="GDScript_dmrlw"]
+script/source = "extends CharacterBody3D
+
+@export_category(\"Mouse Config\")
+@export var sensitivity: float = 0.003
+@export var pitch_min_angle := -80
+@export var pitch_max_angle := 80
+@export var pitch: float = 0.0
+@export_category(\"Maps\")
+@export var grid_map: GridMap
+
+const SPEED = 5.0
+const JUMP_VELOCITY = 4.5
+
+func _ready():
+	Global.player = self
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		# Rotação horizontal (Yaw) no corpo
+		rotate_y(-event.relative.x * sensitivity)
+
+		# Rotação vertical (Pitch) na câmera
+		pitch += -event.relative.y * sensitivity
+		pitch = clamp(pitch, deg_to_rad(pitch_min_angle), deg_to_rad(pitch_max_angle))
+		$Camera.rotation.x = pitch
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir := Input.get_vector(\"move_left\", \"move_right\", \"move_up\", \"move_down\")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+
+	move_and_slide()
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dmrlw"]
+radius = 0.65
+
+[node name="Main" type="Node3D" unique_id=124682936]
+
+[node name="GridMap" type="GridMap" parent="." unique_id=1605039875]
+mesh_library = ExtResource("1_oex3p")
+data = {
+"cells": PackedInt32Array(-65536, 65535, 917504, -65536, 0, 917504, -1, 0, 0, -1, 65535, 0, -65536, 65534, 0, -1, 65534, 0, -2, 65535, 0, -2, 0, 0, -2, 1, 0, -1, 1, 0, -1, 2, 0, -65536, 2, 0, -65536, 1, 0, -65535, 1, 0, -65534, 1, 0, -65534, 0, 0, -65534, 65535, 0, -65535, 65535, 0, -65535, 65534, 0, -65535, 65533, 0, -65535, 0, 0, -65534, 2, 0, -65535, 2, 0, -65533, 0, 0, -65533, 65535, 0, -65533, 65534, 0, -65533, 65533, 0, -65534, 65533, 0, -65534, 65534, 0, -65533, 1, 0, -65533, 2, 0, -2, 2, 0, -2, 65534, 0, -2, 65533, 0, -1, 65533, 0, -65536, 65532, 0, -65535, 65532, 0, -65536, 65533, 0, -65534, 65532, 0, -65533, 65532, 0, -1, 65532, 0, -2, 65532, 0, -2, 3, 0, -1, 3, 0, -1, 4, 0, -65536, 4, 0, -65535, 4, 0, -65534, 4, 0, -65533, 4, 0, -65533, 3, 0, -65535, 3, 0, -65536, 3, 0, -65532, 4, 0, -65531, 4, 0, -65534, 3, 0, -1, 5, 0, -2, 5, 0, -2, 4, 0, 2, 65534, 0, 3, 65534, 0, 3, 65535, 0, 2, 65535, 0, 2, 0, 0, 3, 0, 0, 1, 65535, 1, 1, 0, 1179649)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1629324258]
+environment = SubResource("Environment_3yxjw")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1325322391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = SubResource("GDScript_dmrlw")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Player" unique_id=179848023]
+shape = SubResource("CapsuleShape3D_dmrlw")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Player" unique_id=275136712]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.5, 0)
+light_volumetric_fog_energy = 10.0
+light_size = 1.0
+light_specular = 1.0
+shadow_enabled = true
+distance_fade_enabled = true
+omni_range = 42.549
+omni_attenuation = -0.297
+
+[node name="Camera" type="Camera3D" parent="Player" unique_id=522428354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+doppler_tracking = 2
+current = true
+fov = 60.0
+near = 0.01
+far = 100.0
