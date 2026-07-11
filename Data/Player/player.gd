@@ -37,7 +37,7 @@ extends CharacterBody3D
 
 # 0: Norte (-Z), 1: Oeste (-X), 2: Sul (+Z), 3: Leste (+X)
 var facing: int = 0
-var history: Array[Vector3i] = []
+var history: Array[Vector3] = []
 
 var is_walking: bool = false
 var is_falling: bool = false
@@ -126,16 +126,16 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		can_move = false
 		velocity += get_gravity()*delta
-		if grid_coord.y <= MIN_HEIGHT:
+		if global_position.y <= MIN_HEIGHT:
 			redo_movement()
 		can_move = true
 		
 	grid_coord = Utils.global_to_grid(grid_map, global_position)
 	
 	@warning_ignore("narrowing_conversion")
-	var coords_changed = history.is_empty() or grid_coord != history[-1]
+	var coords_changed = history.is_empty() or global_position != history[-1]
 	if coords_changed and is_on_floor() and can_move:
-		history.append(grid_coord)
+		history.append(global_position)
 		play_footstep()
 		if history.size() > MAX_HISTORY:
 			history.remove_at(0)
