@@ -172,13 +172,15 @@ func _process(_delta: float) -> void:
 			
 			var stairs_height: float = get_climb_height_if_valid(target_coord)
 			
+			
+			
 			# Se for -999.0, é uma parede/obstáculo. Cancela o movimento.
 			if stairs_height == -999.0:
 				return
 			else:
-				# Movimento permitido!
+				if stairs_height < -MAX_CLIMBABLE_HEIGHT/TILE_SIZE:
+					stairs_height = 0.0
 				print('Subindo/Descendo: ', stairs_height)
-				
 				# O Tween deve adicionar a altura final calculada
 				await move_forward(Vector3(movement) + Vector3(0, stairs_height, 0))
 
