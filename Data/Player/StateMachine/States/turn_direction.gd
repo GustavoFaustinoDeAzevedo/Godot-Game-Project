@@ -1,16 +1,12 @@
-extends Node
+extends PlayerState
 
-var machine
+func enter(data):
+	if data.direction > 0:
+		player.rotator.turn_right()
+	else:
+		player.rotator.turn_left()
 
-func _ready():
-	machine = get_parent()
-
-func enter():
-	print("Entrou no estado Idle")
-
-func update(_delta):
-	if Utils.is_turn_direction_input:
-		machine.change_state(machine.get_node("Walk"))
-
-func exit():
-	print("Saiu do estado Idle")
+func physics_update(delta):
+	player.rotator.update(delta)
+	if !player.rotator.is_turning():
+		change_state(&"Idle")

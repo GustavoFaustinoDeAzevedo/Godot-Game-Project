@@ -1,16 +1,27 @@
-extends Node
+extends PlayerState
 
-var machine
 
-func _ready():
-	machine = get_parent()
+	
+func handle_input(event):
 
-func enter():
-	print("Entrou no estado Idle")
+	if event.is_action_pressed("move_forward"):
 
-func update(_delta):
-	if Utils.movement_input_vector != Vector2i.ZERO:
-		machine.change_state(machine.get_node("Walk"))
+		change_state(&"Walk")
 
-func exit():
-	print("Saiu do estado Idle")
+	elif event.is_action_pressed("turn_left"):
+
+		change_state(
+			&"Turn",
+			{
+				"direction": -1
+			}
+		)
+
+	elif event.is_action_pressed("turn_right"):
+
+		change_state(
+			&"Turn",
+			{
+				"direction": 1
+			}
+		)
