@@ -519,8 +519,8 @@ func get_room_from_scene_path(scene: String, safe := true) -> String:
 		scene = ResourceUID.path_to_uid(scene)
 	
 	scene = scene_remaps.get(scene, scene)
-	if safe:
-		assert(scene in assigned_scenes)
+	#if safe:
+		#assert(scene in assigned_scenes)
 	return scene
 
 func get_room_friendly_name(path: String) -> String:

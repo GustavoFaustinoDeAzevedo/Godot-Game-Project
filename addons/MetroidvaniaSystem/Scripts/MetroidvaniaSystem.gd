@@ -294,7 +294,7 @@ func get_object_coords(object: Object) -> Vector3i:
 	elif object is Node:
 		var room_name: String = map_data.get_room_from_scene_path(object.owner.scene_file_path)
 		
-		var coords: Vector3i = map_data.assigned_scenes[room_name].front()
+		var coords: Vector3i = Vector3i.ZERO
 		for vec in map_data.assigned_scenes[room_name]:
 			coords.x = mini(coords.x, vec.x)
 			coords.y = mini(coords.y, vec.y)

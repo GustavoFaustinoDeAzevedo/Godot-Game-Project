@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-run/main_scene="uid://1ylctu3paa01"
+run/main_scene="uid://v7hn7cr7wbqq"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -37,6 +37,7 @@ enabled=PackedStringArray("res://addons/MetroidvaniaSystem/EditorExtension/plugi
 Grass="Bloco de grama"
 Wood="Bloco de Madeira"
 Concrete="Bloco Genérico"
+grid_world=""
 
 [input]
 
