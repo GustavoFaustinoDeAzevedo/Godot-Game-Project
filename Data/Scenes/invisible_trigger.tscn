@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://xv4n06r3fupc"]
+
+[ext_resource type="Script" uid="uid://bsquujgjt7gcp" path="res://Data/Scripts/Grid/grid_entity.gd" id="1_2mf35"]
+[ext_resource type="Script" uid="uid://dmgf6vkdokww1" path="res://Data/Scripts/Entity/entity_config.gd" id="1_52k1w"]
+[ext_resource type="Script" uid="uid://cbbc3ny1ymh71" path="res://Data/Scripts/Entity/InvisibleTrigger/event_runner.gd" id="3_2mf35"]
+[ext_resource type="Script" uid="uid://bvdvitwd2j8of" path="res://Data/Scripts/Entity/EventCommand/Commands/print_command.gd" id="4_52k1w"]
+[ext_resource type="Resource" uid="uid://lplqlg0ak4pf" path="res://tests/dialog test.dialogue" id="5_861rl"]
+[ext_resource type="Script" uid="uid://buwu87ji05un8" path="res://Data/Scripts/Entity/EventCommand/Commands/wait_command.gd" id="5_fkeut"]
+[ext_resource type="Resource" uid="uid://p20yamm8trm3" path="res://tests/test2dialog.dialogue" id="7_ug8jg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa2ql"]
+transparency = 1
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+albedo_color = Color(0.91764706, 0, 1, 1)
+refraction_scale = -0.72
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fkeut"]
+
+[sub_resource type="GDScript" id="GDScript_2mf35"]
+resource_name = "hide_trigger"
+script/source = "extends MeshInstance3D
+
+
+func _ready():
+	queue_free()
+"
+
+[node name="InvisibleTrigger" type="Node3D" unique_id=1400038991]
+script = ExtResource("1_52k1w")
+trigger_mode = 2
+
+[node name="GridEntity" type="Node" parent="." unique_id=1361638608]
+script = ExtResource("1_2mf35")
+metadata/_custom_type_script = "uid://bsquujgjt7gcp"
+
+[node name="EventRunner" type="Node" parent="." unique_id=1640410369]
+script = ExtResource("3_2mf35")
+
+[node name="PrintCommand" type="Node" parent="EventRunner" unique_id=1170387466]
+script = ExtResource("4_52k1w")
+dialogue = ExtResource("5_861rl")
+
+[node name="WaitCommand" type="Node" parent="EventRunner" unique_id=2122005099]
+script = ExtResource("5_fkeut")
+
+[node name="PrintCommand2" type="Node" parent="EventRunner" unique_id=472080937]
+script = ExtResource("4_52k1w")
+dialogue = ExtResource("7_ug8jg")
+
+[node name="HideEvent" type="MeshInstance3D" parent="." unique_id=887794003]
+material_overlay = SubResource("StandardMaterial3D_sa2ql")
+transparency = 0.9
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_fkeut")
+script = SubResource("GDScript_2mf35")

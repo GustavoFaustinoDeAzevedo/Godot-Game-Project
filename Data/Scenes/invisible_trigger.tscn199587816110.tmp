@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://xv4n06r3fupc"]
+
+[ext_resource type="Script" uid="uid://bsquujgjt7gcp" path="res://Data/Scripts/grid_entity.gd" id="1_2mf35"]
+[ext_resource type="Script" uid="uid://dmgf6vkdokww1" path="res://Data/Scripts/entity_config.gd" id="1_52k1w"]
+[ext_resource type="Script" uid="uid://b2reyv27i24fn" path="res://Data/Scripts/Entity/invisible_trigger.gd" id="1_fkeut"]
+[ext_resource type="Script" uid="uid://cp2jwbp313agj" path="res://Data/Scripts/print_event.gd" id="2_52k1w"]
+
+[node name="InvisibleTrigger" type="Node3D" unique_id=1400038991]
+script = ExtResource("1_fkeut")
+blocks_movement = false
+trigger_mode = 0
+
+[node name="EntityConfig" type="Node" parent="." unique_id=516902531]
+script = ExtResource("1_52k1w")
+
+[node name="GridEntity" type="Node" parent="." unique_id=1361638608]
+script = ExtResource("1_2mf35")
+metadata/_custom_type_script = "uid://bsquujgjt7gcp"
+
+[node name="GridEvent" type="Node" parent="GridEntity" unique_id=271033760]
+script = ExtResource("2_52k1w")

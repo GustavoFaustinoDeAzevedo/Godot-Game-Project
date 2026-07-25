@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bdf2vmibinnow"]
+
+[ext_resource type="Script" uid="uid://bsquujgjt7gcp" path="res://Data/Scripts/Grid/grid_entity.gd" id="1_clnt3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sa2ql"]
+
+[node name="Wall" type="Node3D" unique_id=1851339327]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1797669721]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1611528719]
+shape = SubResource("BoxShape3D_sa2ql")
+
+[node name="GridEntity" type="Node" parent="." unique_id=1182411632]
+script = ExtResource("1_clnt3")
+metadata/_custom_type_script = "uid://bsquujgjt7gcp"

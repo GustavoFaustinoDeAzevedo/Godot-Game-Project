@@ -10,6 +10,14 @@ func grid_to_world(grid_map: GridMap, cell: Vector3i) -> Vector3:
 		grid_map.map_to_local(cell)
 	)
 
+## Retorna o primeiro nó com determinada classe na árvore do pai, retorna null caso não encontre
+func find_sibling_by_class(node_class: String):
+	for child in get_parent().get_children():
+		if child.is_class(node_class):
+			return child
+
+	return null
+
 func round_to_decimals(value: float, decimals: int) -> float:
 	value =  0.0 if abs(value) < 0.001 else value
 	var factor = pow(10, decimals)
