@@ -8,26 +8,24 @@ class_name GridEntity
 # LIFECYCLE
 #===============================================================================
 
-# Aguarda todos os nós da cena serem inicializados antes de registrar
-# a entidade e seus eventos no GridWorld.
 func _ready():
 	call_deferred("_register")
-	if get_parent() is not Player:
-		var runner = get_parent().get_node("EventRunner") as EventRunner
-		if runner != null:
-			runner.start()
 
-# Registra a entidade na célula atual e registra todos os GridEvents
-# que pertencem a esta entidade.
+#===============================================================================
+
 func _register():
-
 	assert(grid_world != null)
-
 	register(get_cell())
 
-# Remove a entidade e seus eventos do GridWorld quando ela sai da árvore.
-func _exit_tree():
+	# Registra eventos autorun quando a entidade existir
+	for child in get_parent().get_children():
+		if child is GridEvent:
+			if child.is_autorun():
+				EventScheduler.register_autorun(child)
 
+#===============================================================================
+
+func _exit_tree():
 	if grid_world == null:
 		return
 
@@ -37,38 +35,42 @@ func _exit_tree():
 # REGISTRATION
 #===============================================================================
 
-## Adiciona a entidade ao GridWorld e registra todos os GridEvents filhos
-## na célula informada.
 func register(cell: Vector3i):
-
 	grid_world.register_entity(
 		self,
 		cell
 	)
-	
+
 	for child in get_parent().get_children():
+
 		if child is GridEvent:
+
 			grid_world.register_event(
 				child,
 				cell
 			)
 
-## Remove a entidade e todos os seus GridEvents da célula informada.
+
 func unregister(cell: Vector3i):
 
 	grid_world.unregister_entity(
 		self,
 		cell
 	)
-	
+
 	for child in get_parent().get_children():
+
 		if child is GridEvent:
+
 			grid_world.unregister_event(
 				child,
 				cell
 			)
 
-## Atualiza o GridWorld quando a entidade muda de uma célula para outra.
+#===============================================================================
+# GRID
+#===============================================================================
+
 func move(
 	old_cell: Vector3i,
 	new_cell: Vector3i
@@ -80,12 +82,7 @@ func move(
 		new_cell
 	)
 
-#===============================================================================
-# GRID
-#===============================================================================
 
-## Retorna a célula onde esta entidade está localizada,
-## convertendo sua posição no mundo para coordenadas da grid.
 func get_cell() -> Vector3i:
 
 	return grid_world.world_to_grid(
@@ -96,18 +93,21 @@ func get_cell() -> Vector3i:
 # ENTITY CALLBACKS
 #===============================================================================
 
-## Informa se outra entidade pode entrar na mesma célula desta entidade.
 func can_enter(_entity: GridEntity) -> bool:
 	return !config.blocks_movement
 
-## Chamado quando outra entidade entra na mesma célula.
+
 func on_enter(_entity: GridEntity):
 	pass
 
-## Chamado quando outra entidade sai da mesma célula.
+
 func on_leave(_entity: GridEntity):
 	pass
 
-## Chamado quando outra entidade interage com esta entidade.
-func interact(_entity: GridEntity):
-	pass
+
+func interact(entity: GridEntity):
+	emit_signal(
+		"entity_interacted",
+		entity,
+		entity.get_cell()
+	)

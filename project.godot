@@ -22,6 +22,7 @@ PhantomCameraManager="*uid://duq6jhf6unyis"
 MetSys="*uid://c01ibpvrp2wsd"
 DialogueManager="*uid://c3rodes2l3gxb"
 CollisionPresetRuntime="*uid://u810pt6u5apa"
+EventScheduler="*uid://c7jbddcnbxkjw"
 
 [display]
 
@@ -38,6 +39,8 @@ Grass="Bloco de grama"
 Wood="Bloco de Madeira"
 Concrete="Bloco Genérico"
 grid_world=""
+event_scheduler=""
+event_schedule=""
 
 [input]
 

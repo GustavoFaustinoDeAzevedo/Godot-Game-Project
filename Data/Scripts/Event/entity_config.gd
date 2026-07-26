@@ -17,10 +17,10 @@ enum TriggerMode
 {
 	ENTER,
 	EXIT,
-	INTERACT,
+	ACTION,
 	AUTORUN,
 	PARALLEL,
-	MANUAL
+	CALL,
 }
 
 

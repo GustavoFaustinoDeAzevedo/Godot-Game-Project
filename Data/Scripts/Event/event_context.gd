@@ -1,8 +1,9 @@
 class_name EventContext
 
-var entity: GridEntity
-var event: GridEvent
 var runner: EventRunner
+var event: GridEvent
+var entity: GridEntity
+var caller: GridEntity
 
 
 func get_world() -> GridWorld:

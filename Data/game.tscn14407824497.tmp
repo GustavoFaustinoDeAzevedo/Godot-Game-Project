@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://dm6fdd3exivwi" path="res://Data/Scripts/Grid/grid_world.gd" id="9_r4esf"]
 [ext_resource type="Script" uid="uid://bsquujgjt7gcp" path="res://Data/Scripts/Grid/grid_entity.gd" id="10_woh4f"]
 [ext_resource type="PackedScene" uid="uid://xv4n06r3fupc" path="res://Data/Scenes/invisible_trigger.tscn" id="12_0y8od"]
-[ext_resource type="Script" uid="uid://c7jbddcnbxkjw" path="res://Data/Scripts/Event/event_scheduler.gd" id="12_i4isl"]
+[ext_resource type="Script" uid="uid://c7jbddcnbxkjw" path="res://Data/Scripts/Entity/event_scheduler.gd" id="12_i4isl"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_e2kow"]
 top_radius = 4.0

@@ -1,18 +1,79 @@
 extends Node
 class_name GridEvent
 
-@onready var trigger: EntityConfig = get_parent() as EntityConfig
+@onready var entity: GridEntity = $"../GridEntity"
+@onready var config: EntityConfig = $"../EntityConfig"
+@onready var runner: EventRunner = $"../EventRunner"
 
 #===============================================================================
 
-func can_execute(_entity: GridEntity) -> bool:
-	return true
+func _ready():
 
-func execute(_entity: GridEntity = null):
-	pass
-	
-func parallel_process(_delta):
-	pass
-	
-func is_finished() -> bool:
+	assert(entity != null)
+	assert(config != null)
+	assert(runner != null)
+
+	runner.finished.connect(_on_runner_finished)
+
+#===============================================================================
+
+## Solicita a execução deste evento.
+func start(caller: GridEntity):
+
+	if !is_enabled():
+		return
+
+	if runner.is_running():
+		return
+
+	runner.start(
+		self,
+		entity,
+		caller
+	)
+
+#===============================================================================
+
+## Interrompe o evento.
+func stop():
+
+	if runner.is_running():
+		runner.finish()
+
+#===============================================================================
+
+func _on_runner_finished(_runner: EventRunner):
+
+	EventScheduler.finish(_runner)
+
+#===============================================================================
+
+func is_running() -> bool:
+	return runner.is_running()
+
+#===============================================================================
+
+func is_enabled() -> bool:
+	return config.enabled
+
+#===============================================================================
+
+func get_trigger_mode() -> EntityConfig.TriggerMode:
+	return config.trigger_mode
+
+#===============================================================================
+
+func is_parallel() -> bool:
+	return config.trigger_mode == EntityConfig.TriggerMode.PARALLEL
+
+#===============================================================================
+
+func is_autorun() -> bool:
+	return config.trigger_mode == EntityConfig.TriggerMode.AUTORUN
+
+#===============================================================================
+
+## Permite bloquear a execução dependendo da lógica do evento.
+## Pode ser sobrescrito em eventos específicos.
+func can_execute(_caller: GridEntity) -> bool:
 	return true
