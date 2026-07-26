@@ -1,11 +1,40 @@
 extends Node
+class_name EventScheduler
 
+var current: EventRunner = null
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+#pra depois
+enum ExecutionMode {
+	EXCLUSIVE,
+	PARALLEL
+}
 
+#===============================================================================
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func request(runner: EventRunner, _mode = ExecutionMode.EXCLUSIVE) -> bool:
+
+	if current != null:
+		return false
+
+	current = runner
+
+	return true
+
+#===============================================================================
+
+func finish(runner: EventRunner):
+
+	if current != runner:
+		return
+
+	current = null
+
+#===============================================================================
+
+func is_busy() -> bool:
+	return current != null
+
+#===============================================================================
+
+func get_current() -> EventRunner:
+	return current

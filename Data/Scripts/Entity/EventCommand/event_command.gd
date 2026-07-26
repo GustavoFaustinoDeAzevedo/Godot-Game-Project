@@ -2,6 +2,7 @@ extends Node
 class_name EventCommand
 
 var runner: EventRunner
+var context: EventContext
 
 #===============================================================================
 
@@ -10,8 +11,9 @@ func can_start() -> bool:
 
 #===============================================================================
 
-func start(_runner: EventRunner):
+func start(_runner):
 	runner = _runner
+	context = runner.context
 
 #===============================================================================
 
