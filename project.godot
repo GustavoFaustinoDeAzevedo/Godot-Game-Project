@@ -23,6 +23,7 @@ MetSys="*uid://c01ibpvrp2wsd"
 DialogueManager="*uid://c3rodes2l3gxb"
 CollisionPresetRuntime="*uid://u810pt6u5apa"
 EventScheduler="*uid://c7jbddcnbxkjw"
+GameState="*uid://cl5rg4tm23124"
 
 [display]
 

@@ -178,10 +178,10 @@ func request_move(
 # INTERACTION
 #===============================================================================
 
-func interact(entity: GridEntity, cell: Vector3i):
+func interact(entity: GridEntity, target_cell: Vector3i):
 
 	emit_signal(
 		"entity_interacted",
 		entity,
-		cell
+		target_cell
 	)

@@ -18,7 +18,10 @@ func _ready():
 #===============================================================================
 
 ## Solicita a execução deste evento.
-func start(caller: GridEntity):
+func start(
+	caller: GridEntity,
+	parent_runner: EventRunner = null
+):
 
 	if !is_enabled():
 		return
@@ -29,7 +32,8 @@ func start(caller: GridEntity):
 	runner.start(
 		self,
 		entity,
-		caller
+		caller,
+		parent_runner
 	)
 
 #===============================================================================
@@ -46,6 +50,11 @@ func _on_runner_finished(_runner: EventRunner):
 
 	EventScheduler.finish(_runner)
 
+#===============================================================================
+
+func get_runner() -> EventRunner:
+	return runner
+	
 #===============================================================================
 
 func is_running() -> bool:

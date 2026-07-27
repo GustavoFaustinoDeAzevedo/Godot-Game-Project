@@ -7,6 +7,7 @@ var parallel_runners: Array[EventRunner] = []
 
 var autorun_events: Array[GridEvent] = []
 
+
 #===============================================================================
 # LIFECYCLE
 #===============================================================================
@@ -125,7 +126,7 @@ func request(
 	caller: GridEntity
 ):
 
-	var runner := event.runner
+	var runner := event.get_runner()
 
 	match event.get_trigger_mode():
 

@@ -105,9 +105,5 @@ func on_leave(_entity: GridEntity):
 	pass
 
 
-func interact(entity: GridEntity):
-	emit_signal(
-		"entity_interacted",
-		entity,
-		entity.get_cell()
-	)
+func interact(_entity: GridEntity):
+	pass
