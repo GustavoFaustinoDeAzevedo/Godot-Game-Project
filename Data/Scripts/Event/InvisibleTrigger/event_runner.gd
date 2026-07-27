@@ -82,6 +82,16 @@ func jump_to(index: int):
 		return
 
 	commands[current_index].start(self)
+	
+func jump_to_command(command: EventCommand):
+
+	var index := commands.find(command)
+
+	if index == -1:
+		finish()
+		return
+
+	jump_to(index)
 
 #===============================================================================
 
