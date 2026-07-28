@@ -1,29 +1,20 @@
-extends EventCommand
+extends TargetCommand
 class_name MoveEntityCommand
 
-@export var target := EventTarget.new()
 
 @export var offset := Vector3i.ZERO
+
 
 func start(_runner):
 
 	super(_runner)
 
-	var target_entity := target.resolve(context)
+	var entities := get_targets()
 
-	if target_entity == null:
-		finish()
-		return
+	for entity in entities:
 
-	var mover := target_entity.get_parent().get_node("GridMover") as GridMover
+		var mover := entity.get_parent().get_node("GridMover")
 
-	if mover == null:
-		finish()
-		return
-
-	mover.try_move(offset)
-
-	while mover.is_moving():
-		await get_tree().process_frame
+		mover.try_move(offset)
 
 	finish()
