@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cuq57k0k6bj00" path="res://Data/Player/player.gd" id="1_ig7tw"]
 [ext_resource type="MeshLibrary" uid="uid://b56470suioolx" path="res://my_tiles.tres" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://c0r2485sytjo" path="res://Data/Player/grid_mover.gd" id="2_5x645"]
+[ext_resource type="Script" uid="uid://c0r2485sytjo" path="res://Data/Scripts/Grid/grid_mover.gd" id="2_5x645"]
 [ext_resource type="Script" uid="uid://bfdeywsttc8s3" path="res://Data/Scripts/StateMachine/state_machine.gd" id="2_k0nqi"]
-[ext_resource type="Script" uid="uid://cmry72seyv41i" path="res://Data/Player/grid_rotator.gd" id="2_td4ln"]
+[ext_resource type="Script" uid="uid://cmry72seyv41i" path="res://Data/Scripts/Grid/grid_rotator.gd" id="2_td4ln"]
 [ext_resource type="Script" uid="uid://o4ahtuopux0o" path="res://Data/Player/StateMachine/States/idle.gd" id="3_0cbp3"]
 [ext_resource type="Script" uid="uid://dbckcfbqwpatm" path="res://Data/Player/StateMachine/States/walk.gd" id="4_0cbp3"]
 [ext_resource type="Texture2D" uid="uid://ds3rhy2845fsw" path="res://Graphics/Parallaxes/Cosmos1.png" id="4_1bvp3"]

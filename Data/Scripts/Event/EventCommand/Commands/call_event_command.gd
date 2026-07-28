@@ -1,7 +1,7 @@
 extends EventCommand
 class_name CallEventCommand
 
-@export var target: GridEvent
+@export var event: GridEvent
 
 #===============================================================================
 
@@ -9,11 +9,11 @@ func start(_runner):
 
 	super(_runner)
 
-	if target == null:
+	if event == null:
 		finish()
 		return
 
-	target.start(
+	event.start(
 		context.caller,
 		runner
 	)

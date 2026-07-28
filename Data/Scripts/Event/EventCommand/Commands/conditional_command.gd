@@ -1,21 +1,9 @@
 extends EventCommand
 class_name ConditionalCommand
 
-enum ConditionType
-{
-	SWITCH,
-	VARIABLE
-}
 
-enum Comparison
-{
-	EQUAL,
-	NOT_EQUAL,
-	GREATER,
-	GREATER_EQUAL,
-	LESS,
-	LESS_EQUAL
-}
+const ConditionType = EventEnums.ConditionType
+const Comparison = EventEnums.Comparison
 
 @export var condition := ConditionType.SWITCH
 

@@ -30,6 +30,11 @@ GameState="*uid://cl5rg4tm23124"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg", "res://addons/collision_presets/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/dungeon_crawler_3d/plugin.cfg", "res://addons/go_build/plugin.cfg", "res://addons/go_placer/plugin.cfg", "res://addons/goactions/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/level_block/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/scene_dependency_viewer/plugin.cfg", "res://addons/ui_builder/plugin.cfg", "res://addons/yard/plugin.cfg")

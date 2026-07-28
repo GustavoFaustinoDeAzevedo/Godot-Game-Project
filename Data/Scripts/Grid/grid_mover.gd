@@ -13,6 +13,7 @@ var moving := false
 var _grid_position: Vector3i
 var target_grid_position: Vector3i
 var target_position: Vector3
+var move_offset := Vector3i.ZERO
 
 var move_speed: float
 
@@ -60,17 +61,55 @@ func update(delta: float):
 
 #===============================================================================
 
-func try_move(direction: Vector3i):
+func try_move(offset: Vector3i) -> bool:
 
 	if moving:
-		return
+		return false
 
-	var cell := _grid_position + direction
+	var path := build_path(offset)
 
-	if !grid_world.request_move(entity, cell):
-		return
+	if path.is_empty():
+		return false
 
-	move_to(cell)
+	if !grid_world.request_path(entity, path):
+		return false
+
+	move_offset = offset
+
+	move_to(path.back())
+
+	return true
+	
+#===============================================================================
+	
+func build_path(offset: Vector3i) -> Array[Vector3i]:
+
+	var path: Array[Vector3i] = []
+
+	var current := _grid_position
+
+	var remaining := offset
+
+	while remaining != Vector3i.ZERO:
+
+		if remaining.x != 0:
+
+			current.x += signi(remaining.x)
+			remaining.x -= signi(remaining.x)
+
+		elif remaining.y != 0:
+
+			current.y += signi(remaining.y)
+			remaining.y -= signi(remaining.y)
+
+		elif remaining.z != 0:
+
+			current.z += signi(remaining.z)
+			remaining.z -= signi(remaining.z)
+
+		path.append(current)
+
+	return path
 
 #===============================================================================
 

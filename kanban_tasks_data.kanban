@@ -23,7 +23,15 @@
 			"tasks": []
 		}
 	],
-	"tasks": [],
+	"tasks": [
+		{
+			"uuid": "6e54ae52-e7b2-4114-9396-e26daa5a18e9",
+			"title": "Detectar chamadas recursivas entre eventos.",
+			"description": "",
+			"category": "7fc2de81-eb95-424a-8354-8e5e5e94496e",
+			"steps": []
+		}
+	],
 	"layout": {
 		"columns": [
 			[

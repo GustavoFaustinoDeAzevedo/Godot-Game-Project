@@ -3,6 +3,8 @@ class_name GridEntity
 
 @onready var config: EntityConfig = get_parent() as EntityConfig
 @onready var grid_world: GridWorld = get_tree().get_first_node_in_group("grid_world")
+@onready var mover: GridMover = $"../GridMover"
+@onready var rotator: GridRotator = $"../GridRotator"
 
 #===============================================================================
 # LIFECYCLE
@@ -81,6 +83,24 @@ func move(
 		old_cell,
 		new_cell
 	)
+	
+func move_forward():
+	mover.try_move(rotator.forward)
+
+func move_back():
+	mover.try_move(rotator.back)
+
+func move_left():
+	mover.try_move(rotator.left)
+	
+func move_right():
+	mover.try_move(rotator.right)
+
+func wait_until_stop():
+	while mover.is_moving():
+		await get_tree().process_frame
+		
+
 
 
 func get_cell() -> Vector3i:

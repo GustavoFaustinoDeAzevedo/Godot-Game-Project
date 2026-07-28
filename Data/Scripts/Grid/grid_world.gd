@@ -174,6 +174,19 @@ func request_move(
 
 	return true
 
+
+func request_path(
+	entity: GridEntity,
+	path: Array[Vector3i]
+) -> bool:
+
+	for cell in path:
+
+		if !request_move(entity, cell):
+			return false
+
+	return true
+
 #===============================================================================
 # INTERACTION
 #===============================================================================
@@ -185,3 +198,44 @@ func interact(entity: GridEntity, target_cell: Vector3i):
 		entity,
 		target_cell
 	)
+	
+#===============================================================================
+# SEARCH
+#===============================================================================
+
+func get_player() -> GridEntity:
+
+	return get_entity_by_group("player")
+
+
+func get_entity_by_group(group_name: StringName) -> GridEntity:
+
+	var node := get_tree().get_first_node_in_group(group_name)
+
+	if node == null:
+		return null
+
+	if node is GridEntity:
+		return node
+
+	var entity := node.get_node_or_null("GridEntity")
+
+	if entity is GridEntity:
+		return entity
+
+	return null
+	
+func get_entities_by_group(
+	group_name: StringName
+) -> Array[GridEntity]:
+
+	var result: Array[GridEntity] = []
+
+	for entity_list in entities.values():
+
+		for entity: GridEntity in entity_list:
+
+			if entity.is_in_group(group_name):
+				result.append(entity)
+
+	return result
