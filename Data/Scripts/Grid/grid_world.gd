@@ -21,6 +21,7 @@ func _add(dictionary: Dictionary, key: Vector3i, value: Object):
 
 	dictionary[key].append(value)
 
+#-------------------------------------------------------------------------------
 
 func _remove(dictionary: Dictionary, key: Vector3i, value: Object):
 
@@ -43,6 +44,7 @@ func world_to_grid(position: Vector3) -> Vector3i:
 		position
 	)
 
+#-------------------------------------------------------------------------------
 
 func grid_to_world(cell: Vector3i) -> Vector3:
 
@@ -63,6 +65,7 @@ func register_entity(entity: GridEntity, cell: Vector3i):
 		entity
 	)
 
+#-------------------------------------------------------------------------------
 
 func unregister_entity(entity: GridEntity, cell: Vector3i):
 
@@ -72,6 +75,7 @@ func unregister_entity(entity: GridEntity, cell: Vector3i):
 		entity
 	)
 
+#-------------------------------------------------------------------------------
 
 func move_entity(
 	entity: GridEntity,
@@ -115,13 +119,33 @@ func move_entity(
 		new_cell
 	)
 
+#-------------------------------------------------------------------------------
 
 func get_entities(cell: Vector3i) -> Array:
 	return entities.get(cell, [])
 
+#-------------------------------------------------------------------------------
 
 func is_occupied(cell: Vector3i) -> bool:
 	return entities.has(cell)
+
+#===============================================================================
+# ENTITY QUERIES
+#===============================================================================
+
+func entity_at(cell: Vector3i) -> GridEntity:
+
+	var list := get_entities(cell)
+
+	if list.is_empty():
+		return null
+
+	return list[0]
+
+
+func has_entity(cell: Vector3i) -> bool:
+
+	return !get_entities(cell).is_empty()
 
 #===============================================================================
 # EVENTS
@@ -135,6 +159,7 @@ func register_event(event: GridEvent, cell: Vector3i):
 		event
 	)
 
+#-------------------------------------------------------------------------------
 
 func unregister_event(event: GridEvent, cell: Vector3i):
 
@@ -144,6 +169,7 @@ func unregister_event(event: GridEvent, cell: Vector3i):
 		event
 	)
 
+#-------------------------------------------------------------------------------
 
 func get_events(cell: Vector3i) -> Array:
 	return events.get(cell, [])
@@ -151,6 +177,42 @@ func get_events(cell: Vector3i) -> Array:
 
 func has_events(cell: Vector3i) -> bool:
 	return events.has(cell)
+
+#===============================================================================
+# EVENT QUERIES
+#===============================================================================
+
+func event_at(cell: Vector3i) -> GridEvent:
+
+	var list := get_events(cell)
+
+	if list.is_empty():
+		return null
+
+	return list[0]
+
+
+func has_event(cell: Vector3i) -> bool:
+
+	return !get_events(cell).is_empty()
+
+#===============================================================================
+# CELL QUERIES
+#===============================================================================
+
+func is_walkable(
+	entity: GridEntity,
+	cell: Vector3i
+) -> bool:
+
+	return request_move(entity, cell)
+
+
+func is_blocked(
+	entity: GridEntity,
+	cell: Vector3i
+) -> bool:
+	return !is_walkable(entity, cell)
 
 #===============================================================================
 # MOVEMENT
@@ -174,6 +236,7 @@ func request_move(
 
 	return true
 
+#-------------------------------------------------------------------------------
 
 func request_path(
 	entity: GridEntity,
@@ -207,6 +270,7 @@ func get_player() -> GridEntity:
 
 	return get_entity_by_group("player")
 
+#-------------------------------------------------------------------------------
 
 func get_entity_by_group(group_name: StringName) -> GridEntity:
 
@@ -225,6 +289,8 @@ func get_entity_by_group(group_name: StringName) -> GridEntity:
 
 	return null
 	
+#-------------------------------------------------------------------------------
+	
 func get_entities_by_group(
 	group_name: StringName
 ) -> Array[GridEntity]:
@@ -239,3 +305,41 @@ func get_entities_by_group(
 				result.append(entity)
 
 	return result
+
+#-------------------------------------------------------------------------------
+
+func build_path(
+	start: Vector3i,
+	end: Vector3i
+) -> Array[Vector3i]:
+
+	var offset := end - start
+	var path: Array[Vector3i] = []
+	var current := start
+	var step := Vector3i(
+		signi(offset.x),
+		signi(offset.y),
+		signi(offset.z)
+	)
+	var remaining := offset
+
+	while remaining != Vector3i.ZERO:
+
+		if remaining.x != 0:
+
+			current.x += step.x
+			remaining.x -= step.x
+
+		elif remaining.y != 0:
+
+			current.y += step.y
+			remaining.y -= step.y
+
+		elif remaining.z != 0:
+
+			current.z += step.z
+			remaining.z -= step.z
+
+		path.append(current)
+
+	return path

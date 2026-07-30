@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://bsquujgjt7gcp" path="res://Data/Scripts/Grid/grid_entity.gd" id="1_2mf35"]
 [ext_resource type="Script" uid="uid://dmgf6vkdokww1" path="res://Data/Scripts/Event/entity_config.gd" id="1_52k1w"]
 [ext_resource type="Script" uid="uid://cbbc3ny1ymh71" path="res://Data/Scripts/Event/InvisibleTrigger/event_runner.gd" id="3_2mf35"]
-[ext_resource type="Script" uid="uid://bvdvitwd2j8of" path="res://Data/Scripts/Event/EventCommand/Commands/print_command.gd" id="4_52k1w"]
+[ext_resource type="Script" uid="uid://bvdvitwd2j8of" path="res://Data/Scripts/Event/EventCommand/Commands/command_print.gd" id="4_52k1w"]
 [ext_resource type="Resource" uid="uid://lplqlg0ak4pf" path="res://tests/dialog test.dialogue" id="5_861rl"]
-[ext_resource type="Script" uid="uid://buwu87ji05un8" path="res://Data/Scripts/Event/EventCommand/Commands/wait_command.gd" id="5_fkeut"]
+[ext_resource type="Script" uid="uid://buwu87ji05un8" path="res://Data/Scripts/Event/EventCommand/Commands/command_wait.gd" id="5_fkeut"]
 [ext_resource type="Resource" uid="uid://p20yamm8trm3" path="res://tests/test2dialog.dialogue" id="7_ug8jg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa2ql"]

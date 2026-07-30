@@ -5,6 +5,8 @@ class_name GridEntity
 @onready var grid_world: GridWorld = get_tree().get_first_node_in_group("grid_world")
 @onready var mover: GridMover = $"../GridMover"
 @onready var rotator: GridRotator = $"../GridRotator"
+@onready var navigator: GridNavigator = $"../GridNavigator"
+@onready var sensor: GridSensor = $"../GridSensor"
 
 #===============================================================================
 # LIFECYCLE
@@ -99,12 +101,14 @@ func move_right():
 func wait_until_stop():
 	while mover.is_moving():
 		await get_tree().process_frame
-		
 
+func get_sensor() -> GridSensor:
+	return sensor
 
+func get_navigator() -> GridNavigator:
+	return navigator
 
 func get_cell() -> Vector3i:
-
 	return grid_world.world_to_grid(
 		get_parent().global_position
 	)

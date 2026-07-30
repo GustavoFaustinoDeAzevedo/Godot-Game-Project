@@ -1,6 +1,10 @@
 extends Node
 class_name GridMover
 
+signal move_started
+signal move_finished
+signal move_cancelled
+
 @export var tile_size := 10.0
 @export var move_duration := 0.4
 
@@ -66,7 +70,7 @@ func try_move(offset: Vector3i) -> bool:
 	if moving:
 		return false
 
-	var path := build_path(offset)
+	var path = grid_world.build_path(_grid_position, offset)
 
 	if path.is_empty():
 		return false
@@ -79,37 +83,6 @@ func try_move(offset: Vector3i) -> bool:
 	move_to(path.back())
 
 	return true
-	
-#===============================================================================
-	
-func build_path(offset: Vector3i) -> Array[Vector3i]:
-
-	var path: Array[Vector3i] = []
-
-	var current := _grid_position
-
-	var remaining := offset
-
-	while remaining != Vector3i.ZERO:
-
-		if remaining.x != 0:
-
-			current.x += signi(remaining.x)
-			remaining.x -= signi(remaining.x)
-
-		elif remaining.y != 0:
-
-			current.y += signi(remaining.y)
-			remaining.y -= signi(remaining.y)
-
-		elif remaining.z != 0:
-
-			current.z += signi(remaining.z)
-			remaining.z -= signi(remaining.z)
-
-		path.append(current)
-
-	return path
 
 #===============================================================================
 
@@ -122,6 +95,7 @@ func move_to(cell: Vector3i):
 	target_position = grid_world.grid_to_world(cell)
 
 	moving = true
+	move_started.emit()
 
 #===============================================================================
 
@@ -152,6 +126,7 @@ func finish_move():
 	_grid_position = target_grid_position
 
 	moving = false
+	move_finished.emit()
 
 #===============================================================================
 
@@ -162,6 +137,7 @@ func resolve_collision(_collision: KinematicCollision3D):
 	)
 
 	moving = false
+	move_cancelled.emit()
 
 #===============================================================================
 
@@ -172,6 +148,7 @@ func cancel_move():
 	)
 
 	moving = false
+	move_cancelled.emit()
 
 #===============================================================================
 

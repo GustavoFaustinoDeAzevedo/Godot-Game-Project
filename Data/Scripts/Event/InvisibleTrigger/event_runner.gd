@@ -28,7 +28,7 @@ func start(
 	event: GridEvent,
 	entity: GridEntity,
 	caller: GridEntity,
-	parent: EventRunner = null
+	parent_runner: EventRunner = null
 ):
 
 	collect_commands()
@@ -43,7 +43,7 @@ func start(
 	context.entity = entity
 	context.caller = caller
 
-	parent_runner = parent
+	self.parent_runner = parent_runner
 
 	running = true
 	current_index = 0

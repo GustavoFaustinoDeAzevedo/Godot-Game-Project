@@ -1,6 +1,10 @@
 extends Node
 class_name GridRotator
 
+signal turn_started
+signal turn_finished
+signal turn_cancelled
+
 @export var turn_duration := 0.12
 
 @onready var body := get_parent() as CharacterBody3D
@@ -37,6 +41,7 @@ func _start_turn(direction: int):
 		return false
 
 	match direction:
+
 		-1:
 			facing = left
 
@@ -48,8 +53,11 @@ func _start_turn(direction: int):
 
 	start_angle = body.rotation.y
 	target_angle = _get_angle()
+
 	elapsed = 0.0
 	turning = true
+
+	turn_started.emit()
 
 	return true
 
@@ -70,6 +78,7 @@ func update(delta):
 	if t >= 1.0:
 		body.rotation.y = target_angle
 		turning = false
+		turn_finished.emit()
 
 #===============================================================================
 
@@ -97,6 +106,19 @@ func _get_angle() -> float:
 			return PI / 2
 
 	return body.rotation.y
+
+#===============================================================================
+
+func cancel_turn():
+
+	if !turning:
+		return
+
+	body.rotation.y = start_angle
+
+	turning = false
+
+	turn_cancelled.emit()
 
 #===============================================================================
 
